@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.xml.ws.Holder;
+
 public class Bank {
 
 	private ArrayList<BankAccount> accounts;
@@ -28,7 +30,7 @@ public class Bank {
 //		}
 		
 		int r = 0;
-		while (r < accounts.size() && accounts.get(r).getHolder().getName() != holderName && accounts.get(r).getHolder().getIdNbr() != idNbr) {
+		while (r < accounts.size() && !(accounts.get(r).getHolder().getName().equals(holderName) && accounts.get(r).getHolder().getIdNbr() == idNbr)) {
 			r++;
 		}
 		if (r >= accounts.size()) {
@@ -77,7 +79,18 @@ public class Bank {
 	 * sorterad på kontoinnehavarnas namn.
 	 */
 	public ArrayList<BankAccount> getAllAccounts() {
-		return accounts;
+		
+		ArrayList<BankAccount> sorted = new ArrayList<BankAccount>();
+		for (BankAccount a : accounts) {
+			int pos = 0;
+			while (pos < sorted.size() && sorted.get(pos).getHolder().getName().compareToIgnoreCase(a.getHolder().getName()) < 0) {
+				pos++;
+			}
+			sorted.add(pos, a);
+			
+		}
+		
+		return sorted;
 
 	}
 
@@ -121,7 +134,16 @@ public class Bank {
 		ArrayList<Customer> foundCustomers = new ArrayList<Customer>();
 		for (int i = 0; i < accounts.size(); i++) {
 			if (accounts.get(i).getHolder().getName().toUpperCase().contains(namePart.toUpperCase())) {
+				int r = 0;
+				while (r < foundCustomers.size()) {
+					if (foundCustomers.get(r).equals(accounts.get(i).getHolder())) {
+						break;
+					}
+					r++;
+				}
+				if (r >= foundCustomers.size()) {
 				foundCustomers.add(accounts.get(i).getHolder());
+				}
 			}
 		}
 		

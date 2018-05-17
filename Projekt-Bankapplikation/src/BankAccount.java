@@ -42,15 +42,16 @@ public class BankAccount {
 	}
 	
 	public String toString() {
-//		String accNbrString = String.format("%04d", accountNumber);
-//		String idString = String.format("%06d", holder.getIdNbr());
-//		String nbrString = String.format("%04d", holder.getCustomerNbr());
+		String accNbrString = String.format("%04d", accountNumber);
+		String idString = String.format("%010d", holder.getIdNbr());
+		String nbrString = String.format("%04d", holder.getCustomerNbr());
 //		String nameFormatteded = String.format("%10s", holder.getName());
-		String formattedAmountString = String.format("%02f", amount);
+		String formattedAmount = String.format("%.2f", amount);
 		
-		return String.format("%-15d%-40s%-15d%-15d%02f", accountNumber, holder.getName(), holder.getIdNbr(), holder.getCustomerNbr(), amount);
+		return String.format("%-15s%-42.40s%-12s%-12s%10s", accNbrString, holder.getName(), idString, nbrString, formattedAmount);
 		
 		//return "Konto " + accNbrString + "\t(" + nameFormatteded + "\tid " + idString + "\t customer " + nbrString + "):\t" + amount + " kr\t";
+		//Fader Abraham Fader Abraham Fyra Söner Hade Abraham Och De Åt Och Drack Och De Drack Och åt
 	}
 	
 	private static int aquireUnique() {

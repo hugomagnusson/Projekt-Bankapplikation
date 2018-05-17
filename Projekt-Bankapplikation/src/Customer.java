@@ -27,7 +27,14 @@ public class Customer {
 	}
 	
 	public String toString(){
-		return "Kund " + customerNbr + "\t" + name + "\t ID  " + idNbr;
+		
+		String custNbrString = String.format("%04d", customerNbr);
+		String idString = String.format("%010d", idNbr);
+////		String nameFormatteded = String.format("%10s", holder.getName());
+		
+		//return "Kund " + customerNbr + "\t" + name + "\t ID  " + idNbr;
+		return String.format("%-15s%-42s%-12s", custNbrString, name, idString);
+		//return String.format("%-15s%-42.40s%-12s%-12s%10s", accNbrString, holder.getName(), idString, nbrString, formattedAmount);
 	}
 	
 	private static int aquireUnique() {
